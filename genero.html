@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selecciona el Género - Vampiro: La Mascarada</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" href="icono.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="hero-container">
+    <div class="overlay"></div>
+    <img src="hero.png" alt="Vampiro: La Mascarada" class="hero-image">
+    <div class="content">
+      <h1>Elige el Género de tu Personaje</h1>
+      <p>Selecciona si tu personaje será hombre o mujer. Esta elección influirá en la narrativa y personalidad de tu vampiro.</p>
+
+      <!-- Tarjetas de Selección -->
+      <div class="gender-selection">
+        <div class="gender-card" onclick="selectGender('male')">
+          <img src="man.png" alt="Hombre" class="gender-image">
+          <h2>Hombre</h2>
+        </div>
+        <div class="gender-card" onclick="selectGender('female')">
+          <img src="woman.png" alt="Mujer" class="gender-image">
+          <h2>Mujer</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Superpuesto -->
+    <footer class="mini-footer">
+      <p>LuquiLabs © 2025 - Todos los derechos reservados. <br> "Donde las sombras cobran vida."</p>
+    </footer>
+  </div>
+
+  <script>
+    // Función para seleccionar el género y redirigir al siguiente paso
+    function selectGender(gender) {
+      localStorage.setItem('selectedGender', gender); // Guardamos el género en localStorage
+      window.location.href = 'nombre.html'; // Redirigimos al siguiente paso
+    }
+  </script>
+</body>
+</html>

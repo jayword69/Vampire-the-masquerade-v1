@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elige tu Clan - Vampiro: La Mascarada</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" href="icono.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="hero-container">
+    <div class="overlay"></div>
+    <img src="hero.png" alt="Vampiro: La Mascarada" class="hero-image">
+    <div class="content">
+      <h1>Elige tu Clan</h1>
+      <p>El clan define tus habilidades únicas y tu naturaleza como vampiro en este oscuro mundo.</p>
+
+      <!-- Contenedor de Clanes -->
+      <div id="clan-grid" class="clan-grid">
+        <!-- Los clanes se generarán dinámicamente aquí -->
+      </div>
+
+      <!-- Botón para Continuar -->
+      <a href="step3.html" class="start-button">
+        <span class="icon">🎮</span> Continuar
+      </a>
+    </div>
+
+    <!-- Footer Superpuesto -->
+    <footer class="mini-footer">
+      <p>LuquiLabs © 2023 - Todos los derechos reservados. <br> "Donde las sombras cobran vida."</p>
+    </footer>
+  </div>
+
+  <script>
+    // Datos de clanes organizados por facción
+    const clansByFaction = {
+      camarilla: [
+        { name: "Brujah", description: "Rebeldes y apasionados, los Brujah son conocidos por su temperamento explosivo y su deseo de justicia." },
+        { name: "Gangrel", description: "Cazadores solitarios y adaptativos, los Gangrel tienen una fuerte conexión con los animales y la naturaleza." },
+        { name: "Malkavian", description: "Visionarios locos, los Malkavian poseen visiones proféticas pero están malditos con la locura." },
+        { name: "Nosferatu", description: "Espías y recolectores de información, los Nosferatu son deformes y viven en las sombras." },
+        { name: "Toreador", description: "Artistas y hedonistas, los Toreador valoran la belleza y el arte por encima de todo." },
+        { name: "Tremere", description: "Hechiceros y alquimistas, los Tremere dominan la magia y la manipulación del poder." },
+        { name: "Ventrue", description: "Nobles y líderes, los Ventrue son maestros de la política y el control social." }
+      ],
+      sabbat: [
+        { name: "Lasombra", description: "Maestros de las sombras, los Lasombra controlan la oscuridad y el poder político." },
+        { name: "Tzimisce", description: "Manipuladores de la carne, los Tzimisce son expertos en transformaciones horribles y terroríficas." }
+      ],
+      independiente: [
+        { name: "Assamita", description: "Asesinos implacables, los Assamita son conocidos por su habilidad para cazar y eliminar a otros vampiros." },
+        { name: "Giovanni", description: "Necromantes y comerciantes, los Giovanni controlan la muerte y el mundo financiero." },
+        { name: "Seguidores de Set", description: "Corruptores y seductores, los Seguidores de Set buscan corromper a otros con promesas de poder." },
+        { name: "Ravnos", description: "Engañadores y ladrones, los Ravnos son maestros del engaño y la ilusión." }
+      ]
+    };
+
+    // Obtener la facción seleccionada previamente
+    const selectedFaction = localStorage.getItem('selectedFaction') || 'camarilla'; // Por defecto "camarilla"
+
+    // Función para mostrar los clanes de la facción seleccionada
+    function displayClans() {
+      const clanGrid = document.getElementById("clan-grid");
+      clanGrid.innerHTML = ""; // Limpiar clanes anteriores
+
+      const clans = clansByFaction[selectedFaction];
+      clans.forEach(clan => {
+        const div = document.createElement("div");
+        div.classList.add("clan-card");
+        div.innerHTML = `
+          <h3>${clan.name}</h3>
+          <p>${clan.description}</p>
+          <div class="button-container">
+            <button class="clan-button" onclick="selectClan('${clan.name}')">Seleccionar</button>
+          </div>
+        `;
+        clanGrid.appendChild(div);
+      });
+    }
+
+    // Función para seleccionar un clan
+    function selectClan(clan) {
+      localStorage.setItem('selectedClan', clan); // Guardar el clan seleccionado
+      alert(`Has seleccionado el clan: ${clan}`);
+    }
+
+    // Mostrar los clanes al cargar la página
+    window.onload = displayClans;
+  </script>
+</body>
+</html>

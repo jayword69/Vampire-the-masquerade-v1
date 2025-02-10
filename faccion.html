@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elige tu Facción - Vampiro: La Mascarada</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" href="icono.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="hero-container">
+    <div class="overlay"></div>
+    <img src="hero.png" alt="Vampiro: La Mascarada" class="hero-image">
+    <div class="content">
+      <h1>Elige tu Facción</h1>
+      <p>La facción define tu rol en el mundo de los vampiros. Cada una tiene su propia filosofía y estilo de vida.</p>
+
+      <!-- Contenedor de Facciones -->
+      <div class="faction-grid">
+        <div class="faction-card" onclick="selectFaction('camarilla')">
+          <h3>Camarilla</h3>
+          <p>Una sociedad secreta que busca mantener el control sobre los vampiros y proteger el secreto de su existencia. Sus miembros son políticos, diplomáticos y manipuladores.</p>
+          <button class="faction-button">Seleccionar</button>
+        </div>
+
+        <div class="faction-card" onclick="selectFaction('sabbat')">
+          <h3>Sabbat</h3>
+          <p>Una secta violenta y anárquica que rechaza las reglas de la Camarilla. Buscan la libertad absoluta y la guerra contra sus enemigos.</p>
+          <button class="faction-button">Seleccionar</button>
+        </div>
+
+        <div class="faction-card" onclick="selectFaction('independiente')">
+          <h3>Independientes</h3>
+          <p>Clanes que no pertenecen a ninguna secta. Son libres pero aislados, a menudo persiguiendo sus propios intereses.</p>
+          <button class="faction-button">Seleccionar</button>
+        </div>
+      </div>
+
+      <!-- Botón para Continuar -->
+      <a href="clan.html" class="start-button">
+        <span class="icon">🎮</span> Continuar
+      </a>
+    </div>
+
+    <!-- Footer Superpuesto -->
+    <footer class="mini-footer">
+      <p>LuquiLabs © 2025 - Todos los derechos reservados. <br> "Donde las sombras cobran vida."</p>
+    </footer>
+  </div>
+
+  <script>
+    // Función para seleccionar una facción
+    function selectFaction(faction) {
+      localStorage.setItem('selectedFaction', faction); // Guardar la facción seleccionada
+      alert(`Has seleccionado la facción: ${faction.charAt(0).toUpperCase() + faction.slice(1)}`);
+    }
+  </script>
+</body>
+</html>

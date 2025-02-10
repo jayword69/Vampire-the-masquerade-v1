@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elige tu Nombre - Vampiro: La Mascarada</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" href="icono.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="hero-container">
+    <div class="overlay"></div>
+    <img src="hero.png" alt="Vampiro: La Mascarada" class="hero-image">
+    <div class="content">
+      <h1>Elige el Nombre de tu Personaje</h1>
+      <p>El nombre de tu vampiro será clave para definir su identidad en este oscuro mundo.</p>
+
+      <!-- Campo de Entrada de Nombre -->
+      <div class="input-group">
+        <label for="characterName">Nombre Completo:</label>
+        <input type="text" id="characterName" placeholder="Escribe aquí..." maxlength="50">
+      </div>
+
+      <!-- Botón de Sugerencias -->
+      <button class="suggestions-button" onclick="toggleSuggestions()">
+        <span class="icon">✨</span>
+      </button>
+
+      <!-- Contenedor de Sugerencias -->
+      <div id="suggestions" class="hidden">
+        <h3>Sugerencias de Nombres</h3>
+        <div class="name-grid" id="nameGrid"></div>
+        <button class="refresh-button" onclick="refreshNames()">
+          <span class="icon">🔄</span>
+        </button>
+      </div>
+
+      <!-- Botón para Continuar -->
+      <a href="faccion.html" class="start-button">
+        <span class="icon">🎮</span> Continuar
+      </a>
+    </div>
+
+    <!-- Footer Superpuesto -->
+    <footer class="mini-footer">
+      <p>LuquiLabs © 2025 - Todos los derechos reservados. <br> "Donde las sombras cobran vida."</p>
+    </footer>
+  </div>
+
+  <script>
+    // Lista de nombres separados por género
+    const maleNames = [
+      "Alaric Blackwood", "Victor Duskfall", "Lucien Ironclad", "Edgar Ravenspire", "Cassian Frostgrave",
+      "Sebastian Holloway", "Thaddeus Stormcrow", "Orion Blackflame", "Finnian Greystone", "Darius Darkthorn"
+    ];
+
+    const femaleNames = [
+      "Isolde Nightshade", "Seraphina Bloodmoor", "Amara Wraithsong", "Genevieve Moonwhisper", "Eleanor Shadowmere",
+      "Morgana Blackthorn", "Valeria Nightshade", "Lyra Emberglow", "Rowena Silverveil", "Elowen Moonshadow"
+    ];
+
+    let currentNames = [];
+    let refreshCount = 0;
+
+    // Obtener el género seleccionado previamente
+    const selectedGender = localStorage.getItem('selectedGender') || 'male'; // Por defecto "male"
+
+    // Función para generar nombres aleatorios según el género
+    function generateRandomNames() {
+      const pool = selectedGender === 'male' ? [...maleNames] : [...femaleNames];
+      return pool.sort(() => Math.random() - 0.5).slice(0, 6); // Mezclar y tomar 6 nombres al azar
+    }
+
+    // Función para mostrar nombres sugeridos
+    function toggleSuggestions() {
+      const suggestionsDiv = document.getElementById("suggestions");
+      if (suggestionsDiv.classList.contains("hidden")) {
+        refreshCount = 0; // Reiniciar contador al abrir sugerencias
+        refreshNames(); // Generar nuevos nombres
+        suggestionsDiv.classList.remove("hidden");
+      } else {
+        suggestionsDiv.classList.add("hidden");
+      }
+    }
+
+    // Función para refrescar nombres
+    function refreshNames() {
+      if (refreshCount >= 5) {
+        alert("Has alcanzado el límite de refrescos. ¡Intenta elegir un nombre!");
+        return;
+      }
+
+      currentNames = generateRandomNames();
+      const nameGrid = document.getElementById("nameGrid");
+      nameGrid.innerHTML = ""; // Limpiar lista anterior
+
+      currentNames.forEach(name => {
+        const div = document.createElement("div");
+        div.textContent = name;
+        div.classList.add("name-card");
+        div.onclick = () => {
+          document.getElementById("characterName").value = name; // Rellenar campo de entrada
+          document.getElementById("suggestions").classList.add("hidden"); // Ocultar sugerencias
+        };
+        nameGrid.appendChild(div);
+      });
+
+      refreshCount++;
+    }
+  </script>
+</body>
+</html>
